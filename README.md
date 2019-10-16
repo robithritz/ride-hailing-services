@@ -11,6 +11,7 @@ This App use PostgreSQL as database system, so you have to make sure to have pos
 ## Getting Started
 ```
 npm install
+npm run build
 ```
 
 ### Start First Service
