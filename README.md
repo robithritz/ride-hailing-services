@@ -22,12 +22,12 @@ npm run start-driver-tracker
 
 ### Start Second Service
 ```
-export RH_DT_PORT=3002
+export RH_LU_PORT=3002
 npm run start-loc-updater
 ```
 
 ### Start Third Service
 ```
-export RH_DT_PORT=3003
+export RH_PM_PORT=3003
 npm run start-pf-monitor
 ```

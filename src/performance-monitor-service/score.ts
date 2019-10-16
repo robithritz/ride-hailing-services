@@ -12,6 +12,33 @@ interface Movement {
     west: number
 }
 
+export async function getPoint(req: Request, res: Response) {
+    const rider_id = req.params.rider_id;
+    if (!rider_id) {
+        res.sendStatus(400);
+        return;
+    }
+
+    const point = await
+        DriverPerformance.findOne({
+            where: {
+                rider_id: rider_id
+            },
+            attributes: ['point']
+        })
+
+    if (!point) {
+        res.statusCode = 400;
+        res.json({
+            status: false, message: `No \`rider_id\` of ${rider_id} was found `
+        });
+        return;
+    }
+
+    res.json({ status: true, message: "Rider was found", data: point });
+
+}
+
 async function performanceUpdater(movement: Movement) {
     const moveData: Movement = movement;
 
@@ -30,7 +57,7 @@ async function performanceUpdater(movement: Movement) {
 
     let total_distance = parseFloat(current_status.get('total_distance') as string);
     total_distance += new_distance;
-    let point = Math.floor(total_distance / 20000);
+    let point = Math.floor(total_distance / 1000);
     try {
         await current_status.update({
             total_distance: total_distance,

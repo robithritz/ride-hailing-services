@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get('/position', getLastPosition);
+app.get('/position/:rider_id', getLastPosition);
 
 const server = createServer(app);
 

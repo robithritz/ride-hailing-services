@@ -13,7 +13,7 @@ interface Movement {
 }
 
 export async function getLastPosition(req: Request, res: Response) {
-    const rider_id = req.query.rider_id;
+    const rider_id = req.params.rider_id;
     if (!rider_id) {
         res.sendStatus(400);
         return;
