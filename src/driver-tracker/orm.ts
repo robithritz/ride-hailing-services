@@ -22,6 +22,18 @@ TrackEvent.init(
     },
     { modelName: 'track_event', sequelize: db }
 );
+
+export class DriverPosisiton extends Model { }
+
+DriverPosisiton.init(
+    {
+        rider_id: DataTypes.INTEGER,
+        latitude: DataTypes.FLOAT,
+        longitude: DataTypes.FLOAT,
+    },
+    { modelName: 'driver_position', sequelize: db }
+)
+
 export function syncDB(): Promise<Sequelize> {
     return db.sync();
 }
