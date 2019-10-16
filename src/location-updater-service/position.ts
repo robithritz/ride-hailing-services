@@ -1,5 +1,6 @@
 import { DriverPosisiton } from "./orm";
 import { bus } from "./bus";
+import { Request, Response } from "express";
 
 // update driver position lat lng
 
@@ -9,6 +10,33 @@ interface Movement {
     east: number,
     south: number,
     west: number
+}
+
+export async function getLastPosition(req: Request, res: Response) {
+    const rider_id = req.query.rider_id;
+    if (!rider_id) {
+        res.sendStatus(400);
+        return;
+    }
+
+    const lastPosition = await
+        DriverPosisiton.findOne({
+            where: {
+                rider_id: rider_id
+            },
+            attributes: ['rider_id', 'latitude', 'longitude', 'updatedAt']
+        })
+
+    if (!lastPosition) {
+        res.statusCode = 400;
+        res.json({
+            status: false, message: `No \`rider_id\` of ${rider_id} was found `
+        });
+        return;
+    }
+
+    res.json({ status: true, message: "Rider was found", data: lastPosition });
+
 }
 
 async function positionUpdater(movement: Movement) {
@@ -41,6 +69,7 @@ async function positionUpdater(movement: Movement) {
 
 export function positionProjector() {
     bus.subscribe('rider.moved', (data) => {
+        console.log("BUS: RIDER MOVED");
         positionUpdater(data);
     })
 }

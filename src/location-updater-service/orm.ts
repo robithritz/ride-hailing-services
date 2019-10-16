@@ -10,19 +10,6 @@ const db = new Sequelize({
     logging: false
 })
 
-export class TrackEvent extends Model { }
-
-TrackEvent.init(
-    {
-        rider_id: DataTypes.INTEGER,
-        north: DataTypes.FLOAT,
-        east: DataTypes.FLOAT,
-        south: DataTypes.FLOAT,
-        west: DataTypes.FLOAT
-    },
-    { modelName: 'track_event', sequelize: db }
-);
-
 export class DriverPosisiton extends Model { }
 
 DriverPosisiton.init(

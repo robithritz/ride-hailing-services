@@ -2,9 +2,11 @@
   "name": "ride-hailing",
   "version": "1.0.0",
   "description": "ride hiling app",
-  "main": "dist/index.js",
+  "main": "dist/driver-tracker-service/index.js",
   "scripts": {
-    "start": "node .",
+    "start-driver-tracker": "node dist/driver-tracker-service/index.js",
+    "start-loc-updater": "node dist/location-updater-service/index.js",
+    "start-pf-monitor": "node dist/performance-monitor-service/index.js",
     "test": "nyc mocha",
     "test-e2e": "nyc mocha --config ./test/.mocharc.yaml",
     "watch-ts": "tsc -w",

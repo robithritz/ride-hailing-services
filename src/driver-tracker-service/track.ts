@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { TrackEvent, DriverPosisiton } from './orm';
+import { TrackEvent } from './orm';
 import { bus } from './bus';
 
 export async function track(req: Request, res: Response) {
